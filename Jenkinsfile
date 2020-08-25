@@ -1,10 +1,6 @@
 pipeline {
    agent any
 
-   environment {
-        PATH = "$PATH:/usr/local/bin"
-   }
-
    stages {
       stage('Verify Branch') {
          steps {
@@ -26,8 +22,7 @@ pipeline {
       stage('Start test app') {
          steps {
             sh(script: """
-               echo `whoami`
-               /usr/local/bin/docker-compose up -d
+               docker-compose up -d
                ./scripts/test_container.ps1
             """)
          }
